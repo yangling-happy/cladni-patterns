@@ -1,0 +1,109 @@
+.preset-selector h3 {
+  margin-bottom: 25px;
+  color: #6ee7b7;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(110, 231, 183, 0.5);
+  transition: all 0.3s ease;
+}
+
+.preset-selector h3:hover {
+  color: #a7f3d0;
+  text-shadow: 0 0 20px rgba(110, 231, 183, 0.8);
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.preset-button {
+  padding: 20px 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.preset-button:hover::before {
+  left: 100%;
+}
+
+.preset-button:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4),
+              0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.preset-button.active {
+  background: rgba(59, 130, 246, 0.35);
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4),
+              inset 0 0 30px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.preset-name {
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.preset-button:hover .preset-name {
+  color: #93c5fd;
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.preset-button.active .preset-name {
+  color: #60a5fa;
+  text-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+}
+
+.preset-details {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.preset-button:hover .preset-details {
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .preset-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .preset-button {
+    padding: 15px 10px;
+  }
+}

@@ -1,0 +1,87 @@
+.pattern-info h3 {
+  margin-bottom: 20px;
+  color: #6ee7b7;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.info-section p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #cbd5e1;
+}
+
+.controls {
+  margin-bottom: 25px;
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #cbd5e1;
+}
+
+.color-scheme-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.color-scheme-button {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.color-scheme-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.color-scheme-button.active {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+}
+
+.current-settings {
+  margin-top: 25px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border-left: 3px solid #10b981;
+}
+
+.current-settings h4 {
+  margin-bottom: 12px;
+  color: #6ee7b7;
+}
+
+.current-settings ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.current-settings li {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.current-settings li:last-child {
+  border-bottom: none;
+}
+
+.current-settings strong {
+  color: #60a5fa;
+  float: right;
+}
