@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist --remove '*.js' '*.css' '*.html' 'assets/'",
+    "deploy": "gh-pages -d dist -r https://github.com/yangling-happy/cladni-patterns.git -b gh-pages",
     "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview --port 4000 --base /cladni-patterns/"
@@ -29,6 +29,6 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.7"
   }
 }
