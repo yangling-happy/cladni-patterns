@@ -1,56 +1,51 @@
 name: Deploy static content to Pages
 
 on:
-  # 当推送到 main 分支时自动触发部署
   push:
     branches: ["main"]
-  # 允许手动触发部署（在 Actions 页面点击运行）
   workflow_dispatch:
 
-# 授予部署权限
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 部署环境
-env:
-  name: github-pages
-  url: ${{ steps.deployment.outputs.page_url }}
+# 允许多个并发部署，取消正在进行的部署，以节省资源
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # 1. 拉取仓库代码
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. 安装 Node.js（匹配你本地的 Node 版本，比如 20.x）
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 20
           cache: 'npm'
 
-      # 3. 安装依赖
       - name: Install dependencies
         run: npm ci
 
-      # 4. 构建静态文件（Vite 会编译 TSX 到 dist 目录）
       - name: Build
         run: npm run build
-
-      # 5. 部署 dist 目录到 GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 上传构建后的 dist 目录（关键：和 Vite 配置的 outDir 一致）
           path: './dist'
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # 这里的引用在 job 内是合法的
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
