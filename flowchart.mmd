@@ -1,38 +1,41 @@
-flowchart TB
-    %% ===== 用户界面操作（包含交互层） =====
-    subgraph TOP[用户界面操作]
+flowchart TD
+    %% ===== 1. React 交互与状态管理层 =====
+    subgraph TOP[React 交互层 - UI 与状态管理]
         direction TB
-        UI[用户界面操作]
+        UI[用户界面交互]
         
-        subgraph INTERACTIVE[交互层]
+        subgraph INTERACTIVE[交互组件库]
             direction LR
-            IN1[输入与界面]
-            IN2[预设模式选择]
-            IN3[颜色方案切换]
+            IN1[频率控制: 调节 n/m 模态]
+            IN2[预设选择: 模式一键切换]
+            IN3[信息展示: 物理参数实时显示]
         end
     end
     
-    %% ===== 参数预处理 =====
-    PP[参数预处理]
+    %% ===== 2. 状态下发桥接 =====
+    PP[参数状态分发: React Props]
     
-    %% ===== 计算层 =====
-    subgraph COMPUTE[计算层]
-        direction LR
-        C1[高优化空间网格生成]
-        C2[二维复位方程求解]
-        C3[多模态叠加计算]
-    end
-    
-    %% ===== 添加层 =====
-    ADD[添加层]
-    
-    %% ===== 当前优化条件 =====
-    subgraph OPTIMIZE[当前优化条件]
-        direction LR
-        O1[根据数据标准化]
-        O2[颜色线性转换]
-        O3[Convex图形绘制]
-        O4[动画线更新]
+    %% ===== 3. 高性能核心引擎 =====
+    subgraph ENGINE[仿真与渲染 - Canvas 引擎]
+        direction TB
+        
+        subgraph COMPUTE[物理计算: src/utils/cladniMath.ts]
+            direction LR
+            C1[驻波方程求解]
+            C2[二维振幅场建模]
+        end
+        
+        subgraph DYNAMICS[粒子动力学循环: 核心演化逻辑]
+            direction TB
+            D1[读取当前位置场振幅]
+            D2[计算随机扰动位移]
+            D3[趋向节线自组织聚集]
+        end
+        
+        subgraph RENDERING[像素级渲染输出]
+            R1[帧回调: requestAnimationFrame]
+            R2[Canvas 2D 绘图: ctx.fillRect]
+        end
     end
     
     %% ===== 连接关系 =====
@@ -41,13 +44,15 @@ flowchart TB
     IN2 --> PP
     IN3 --> PP
     PP --> COMPUTE
-    C1 --> ADD
-    C2 --> ADD
-    C3 --> ADD
-    ADD --> OPTIMIZE
+    PP --> DYNAMICS
     
-    %% ===== 简洁的单色系配色方案 =====
-    %% 主层配色 - 蓝色系渐变
+    %% 核心数据流
+    COMPUTE -.->|场强度数据| DYNAMICS
+    DYNAMICS --> RENDERING
+    RENDERING -.->|逐帧更新驱动| DYNAMICS
+    
+    %% ===== 恢复原版彩色配色方案 =====
+    %% 交互层 - 蓝色与绿色系
     style TOP fill:#e8f4fd,stroke:#0066cc,stroke-width:2px
     style UI fill:#cce5ff,stroke:#004d99,stroke-width:2px
     style INTERACTIVE fill:#d9f2d9,stroke:#267326,stroke-width:2px
@@ -55,17 +60,14 @@ flowchart TB
     style IN2 fill:#f0f9f0,stroke:#4d944d,stroke-width:1px
     style IN3 fill:#f0f9f0,stroke:#4d944d,stroke-width:1px
     
+    %% 桥接层 - 橙色系
     style PP fill:#fff5e6,stroke:#cc6600,stroke-width:2px
     
-    style COMPUTE fill:#ffe6e6,stroke:#cc0000,stroke-width:2px
-    style C1 fill:#ffe6f2,stroke:#990073,stroke-width:1px
-    style C2 fill:#ffe6f2,stroke:#990073,stroke-width:1px
-    style C3 fill:#ffe6f2,stroke:#990073,stroke-width:1px
+    %% 计算与动力学层 - 红色与紫色系
+    style ENGINE fill:#ffe6e6,stroke:#cc0000,stroke-width:2px
+    style COMPUTE fill:#ffe6f2,stroke:#990073,stroke-width:1px
+    style DYNAMICS fill:#fce4ec,stroke:#c2185b,stroke-width:1px
     
-    style ADD fill:#e6f7ff,stroke:#0086b3,stroke-width:2px
-    
-    style OPTIMIZE fill:#f0f0f5,stroke:#666699,stroke-width:2px
-    style O1 fill:#f9f9f9,stroke:#999999,stroke-width:1px
-    style O2 fill:#f9f9f9,stroke:#999999,stroke-width:1px
-    style O3 fill:#f9f9f9,stroke:#999999,stroke-width:1px
-    style O4 fill:#f9f9f9,stroke:#999999,stroke-width:1px
+    %% 渲染层 - 灰紫色系
+    style RENDERING fill:#f0f0f5,stroke:#666699,stroke-width:2px
+    style C1,C2,D1,D2,D3,R1,R2 fill:#ffffff,stroke:#999999,stroke-width:1px
