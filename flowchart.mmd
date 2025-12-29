@@ -1,0 +1,71 @@
+flowchart TB
+    %% ===== 用户界面操作（包含交互层） =====
+    subgraph TOP[用户界面操作]
+        direction TB
+        UI[用户界面操作]
+        
+        subgraph INTERACTIVE[交互层]
+            direction LR
+            IN1[输入与界面]
+            IN2[预设模式选择]
+            IN3[颜色方案切换]
+        end
+    end
+    
+    %% ===== 参数预处理 =====
+    PP[参数预处理]
+    
+    %% ===== 计算层 =====
+    subgraph COMPUTE[计算层]
+        direction LR
+        C1[高优化空间网格生成]
+        C2[二维复位方程求解]
+        C3[多模态叠加计算]
+    end
+    
+    %% ===== 添加层 =====
+    ADD[添加层]
+    
+    %% ===== 当前优化条件 =====
+    subgraph OPTIMIZE[当前优化条件]
+        direction LR
+        O1[根据数据标准化]
+        O2[颜色线性转换]
+        O3[Convex图形绘制]
+        O4[动画线更新]
+    end
+    
+    %% ===== 连接关系 =====
+    UI --> INTERACTIVE
+    IN1 --> PP
+    IN2 --> PP
+    IN3 --> PP
+    PP --> COMPUTE
+    C1 --> ADD
+    C2 --> ADD
+    C3 --> ADD
+    ADD --> OPTIMIZE
+    
+    %% ===== 简洁的单色系配色方案 =====
+    %% 主层配色 - 蓝色系渐变
+    style TOP fill:#e8f4fd,stroke:#0066cc,stroke-width:2px
+    style UI fill:#cce5ff,stroke:#004d99,stroke-width:2px
+    style INTERACTIVE fill:#d9f2d9,stroke:#267326,stroke-width:2px
+    style IN1 fill:#f0f9f0,stroke:#4d944d,stroke-width:1px
+    style IN2 fill:#f0f9f0,stroke:#4d944d,stroke-width:1px
+    style IN3 fill:#f0f9f0,stroke:#4d944d,stroke-width:1px
+    
+    style PP fill:#fff5e6,stroke:#cc6600,stroke-width:2px
+    
+    style COMPUTE fill:#ffe6e6,stroke:#cc0000,stroke-width:2px
+    style C1 fill:#ffe6f2,stroke:#990073,stroke-width:1px
+    style C2 fill:#ffe6f2,stroke:#990073,stroke-width:1px
+    style C3 fill:#ffe6f2,stroke:#990073,stroke-width:1px
+    
+    style ADD fill:#e6f7ff,stroke:#0086b3,stroke-width:2px
+    
+    style OPTIMIZE fill:#f0f0f5,stroke:#666699,stroke-width:2px
+    style O1 fill:#f9f9f9,stroke:#999999,stroke-width:1px
+    style O2 fill:#f9f9f9,stroke:#999999,stroke-width:1px
+    style O3 fill:#f9f9f9,stroke:#999999,stroke-width:1px
+    style O4 fill:#f9f9f9,stroke:#999999,stroke-width:1px
